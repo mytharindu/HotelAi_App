@@ -59,7 +59,11 @@ export default function AISearch() {
   }, [isSearchMode]);
 
   const handleSearch = async (e) => {
-    e.preventDefault()
+
+    if (e && e.preventDefault) {
+      e.preventDefault();
+    }
+
     if (!value.trim()) return
 
     setIsLoading(true)
@@ -86,7 +90,7 @@ export default function AISearch() {
     dispatch(clearSearch());
   }
 
-    function handleKeyDown(e) {
+  function handleKeyDown(e) {
     if (e.key === "Enter") {
       handleSearch();
     }
@@ -100,8 +104,8 @@ export default function AISearch() {
       className={styles.container}
     >
       <div className={styles.wrapper}>
-        <motion.form
-          onSubmit={handleSearch}
+        <motion.div
+          //onSubmit={handleSearch}
           animate={{ scale: isFocused ? 1.02 : 1 }}
           transition={{ duration: 0.2 }}
           className={styles.searchForm}
@@ -150,10 +154,11 @@ export default function AISearch() {
               className="pr-1"
             >
               <Button
-                type="submit"
-                disabled={isLoading || !query.trim()}
+                type="button"
+                disabled={isLoading || !value.trim()}
                 size="sm"
-                className={styles.searchButton}
+                className={styles.submitButton}
+                onClick={() => handleSearch()}
               >
                 {isLoading ? (
                   <motion.div animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}>
@@ -166,7 +171,7 @@ export default function AISearch() {
               </Button>
             </motion.div>
           </div>
-        </motion.form>
+        </motion.div>
 
         <AnimatePresence>
           {!value && !isLoading && (
