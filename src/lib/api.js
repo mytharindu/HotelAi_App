@@ -55,6 +55,10 @@ export const api = createApi({
     getBookingById: build.query({
       query: (bookingId) => `bookings/${bookingId}`,
     }),
+      getUserBookings: build.query({
+      query: () => "bookings",
+      providesTags: [{ type: "Bookings", id: "LIST" }],
+    }),
     createCheckoutSession: build.mutation({
       query: (payload) => ({
         url: `payments/create-checkout-session`,
@@ -101,6 +105,13 @@ export const api = createApi({
       query: ({ hotelId, checkIn, checkOut }) =>
         `bookings/availability?hotelId=${hotelId}&checkIn=${checkIn}&checkOut=${checkOut}`,
     }),
+    
+    deleteUserAccount: build.mutation({
+      query: () => ({
+        url: "user/delete",
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -113,6 +124,7 @@ export const {
   useCreateHotelMutation,
   useCreateBookingMutation,
   useGetBookingByIdQuery,
+  useGetUserBookingsQuery,
   useCreateCheckoutSessionMutation,
   useGetCheckoutSessionStatusQuery,
   useAddLocationMutation,
@@ -120,4 +132,5 @@ export const {
   useAddReviewMutation,
   useGetReviewsForHotelQuery,
   useCheckRoomAvailabilityQuery,
+  useDeleteUserAccountMutation,
 } = api;
