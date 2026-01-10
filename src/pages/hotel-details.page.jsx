@@ -38,10 +38,14 @@ const HotelDetailsPage = () => {
 
   const handleBook = async (bookingData) => {
     try {
+      const checkInDate = new Date(bookingData.checkIn);
+      const checkOutDate = new Date(bookingData.checkOut);
+      const nights = Math.ceil((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
       const result = await createBooking({
         hotelId: _id,
         checkIn: bookingData.checkIn,
         checkOut: bookingData.checkOut,
+        totalAmount: hotel.price * nights,
       }).unwrap();
       navigate(`/booking/payment?bookingId=${result._id}`);
     } catch (error) {}

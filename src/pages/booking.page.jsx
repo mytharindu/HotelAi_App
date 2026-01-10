@@ -67,6 +67,7 @@ const BookingPage = () => {
         hotelId: _id,
         checkIn: checkInDate.toISOString(),
         checkOut: checkOutDate.toISOString(),
+        totalAmount: hotel.price * nights,
         guests: guests,
       }).unwrap();
 
