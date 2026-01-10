@@ -97,6 +97,10 @@ export const api = createApi({
         { type: "Reviews", id: hotelId },
       ],
     }),
+    checkRoomAvailability: build.query({
+      query: ({ hotelId, checkIn, checkOut }) =>
+        `bookings/availability?hotelId=${hotelId}&checkIn=${checkIn}&checkOut=${checkOut}`,
+    }),
   }),
 });
 
@@ -115,4 +119,5 @@ export const {
   useGetAllLocationsQuery,
   useAddReviewMutation,
   useGetReviewsForHotelQuery,
+  useCheckRoomAvailabilityQuery,
 } = api;

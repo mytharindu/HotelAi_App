@@ -6,6 +6,7 @@ import HomePage from "./pages/home.page.jsx";
 import HotelDetailsPage from "./pages/hotel-details.page.jsx";
 import HotelsPage from "./pages/hotels.page.jsx";
 import PaymentPage from "./pages/payment.page.jsx";
+import BookingPage from './pages/booking.page.jsx';
 import CompletePage from "./pages/complete.page.jsx";
 import NotFoundPage from "./pages/not-found.page.jsx";
 import SignInPage from "./pages/sign-in.page.jsx";
@@ -40,6 +41,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/hotels" element={<HotelsPage />} />
               <Route element={<ProtectLayout />}>
                 <Route path="/hotels/:_id" element={<HotelDetailsPage />} />
+                <Route path="/hotels/:_id/book" element={<BookingPage />} />
                 <Route path="/booking/payment" element={<PaymentPage />} />
                 <Route path="/booking/complete" element={<CompletePage />} />
                 <Route element={<AdminProtectLayout />}>
